@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home Page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <style>
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 60px; /* Set the fixed height of the footer here */
+      line-height: 60px; /* Vertically center the text there */
+      background-color: #f5f5f5;
+    }
+  </style>
+</head>
+<body>
+<!-- Nav -->
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">FILMWEB 2.0</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/">Lista wszystkich filmów<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active" href="/movie/new/">Dodaj film</a>
+    </div>
+  </div>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup2">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/">Lista wszystkich aktorów<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active" href="/movie/new/">Dodaj aktora</a>
+    </div>
+  </div>
+</nav>
+<!-- Nav -->
+
+<!-- Form -->
+<div class="card">
+  <div class="card-body">
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="movie-name">Nazwa filmu</label>
+        <input type="text" class="form-control" id="movie-name" aria-describedby="movie-name-help" placeholder="Nazwa filmu" name="movie-name">
+        <small id="movie-name-help" class="form-text text-muted">Nazwa filmu musi być prawdziwa.</small>
+      </div>
+      <div class="form-group">
+        <label for="director">Reżyser</label>
+        <input type="text" class="form-control" id="director" aria-describedby="director-help" placeholder="Reżyser" name="director">
+        <small id="director-help" class="form-text text-muted">Reżyser musi być prawdziwy.</small>
+      </div>
+      <div class="form-group">
+        <label for="year_of_production">Rok produkcji</label>
+        <input type="number" step="1" class="form-control" id="year_of_production" placeholder="2000" name="year_of_production">
+      </div>
+        <div class="form-group">
+          <label for="rating">Rating</label>
+          <input type="select" class="form-control" id="rating" name="rating">
+          <select>
+            <option>5</option>
+            <option selected>4</option>
+            <option>3</option>
+            <option>2</option>
+            <option>1</option>
+            <option>0</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="genre">Gatunek</label>
+        <input type="number" step="1" class="form-control" id="genre" placeholder="1" name="genre">
+      </div>
+      <button type="submit" class="btn btn-primary">Dodaj film</button>
+    </form>
+  </div>
+</div>
+<!-- Form -->
+
+{% if error %}
+<!-- Form error -->
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{error}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<!-- Form error -->
+{% endif %}
+
+<!-- Footer -->
+<footer class="footer">
+      <div class="container">
+        <span class="text-muted">Kamil Klekotka</span>
+      </div>
+    </footer>
+<!-- Footer -->
+</body>
+</html>
