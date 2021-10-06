@@ -65,3 +65,17 @@ class ActorListView(View):
     def get(self, request):
         actors = Actors.objects.all()
         return render(request, "actors.html", context={"actors": actors})
+
+
+class DeleteMovieView(View):
+    def get(self, request, id):
+        movie = Movies.objects.get(id=id)
+        movie.delete()
+        return redirect("movie-list")
+
+
+class DeleteActorView(View):
+    def get(self, request, id):
+        actor = Actors.objects.get(id=id)
+        actor.delete()
+        return redirect("actor-list")

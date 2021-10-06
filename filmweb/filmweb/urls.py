@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from filmweb_app.views import AddMovie, MovieListView, AddActor, ActorListView
+from filmweb_app.views import (AddMovie,
+                               MovieListView,
+                               AddActor,
+                               ActorListView,
+                               DeleteMovieView,
+                               DeleteActorView
+                               )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,4 +29,6 @@ urlpatterns = [
     path('', MovieListView.as_view(), name="movie-list"),
     path('actor/new/', AddActor.as_view(), name="add-actor"),
     path('actors/', ActorListView.as_view(), name="actor-list"),
+    path('movie/delete/<int:id>/', DeleteMovieView.as_view(), name="movie-list"),
+    path('actor/delete/<int:id>/', DeleteActorView.as_view(), name="actor-list"),
 ]
