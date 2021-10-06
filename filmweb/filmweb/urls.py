@@ -18,6 +18,7 @@ from django.urls import path
 from filmweb_app.views import (AddMovie,
                                ActorDetails,
                                MovieDetails,
+                               SearchViewActor,
                                SearchViewMovie,
                                ModifyActor,
                                ModifyMovie,
@@ -25,8 +26,7 @@ from filmweb_app.views import (AddMovie,
                                AddActor,
                                ActorListView,
                                DeleteMovieView,
-                               DeleteActorView,
-                               )
+                               DeleteActorView,)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,6 +39,7 @@ urlpatterns = [
     path('movie/modify/<int:id>/', ModifyMovie.as_view(), name="modify-movie"),
     path('actor/modify/<int:id>/', ModifyActor.as_view(), name="modify-actor"),
     path('search-movie/', SearchViewMovie.as_view(), name="search-view-movie"),
+    path('search-actor/', SearchViewActor.as_view(), name="search-view-actor"),
     path('movie/<int:id>/', MovieDetails.as_view(), name="movie"),
     path('actor/<int:id>/', ActorDetails.as_view(), name="actor"),
 ]

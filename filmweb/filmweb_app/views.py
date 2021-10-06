@@ -37,6 +37,7 @@ class MovieListView(View):
         movies = Movies.objects.all()
         return render(request, "movies.html", context={"movies": movies})
 
+
 class AddActor(View):
     def get(self, request):
         return render(request, "add_actor.html")
@@ -61,6 +62,7 @@ class AddActor(View):
         Actors.objects.create(actor_name=name, year_of_birth=year, gender=gender)
         return redirect("actor-list")
 
+
 class ActorListView(View):
     def get(self, request):
         actors = Actors.objects.all()
@@ -79,6 +81,7 @@ class DeleteActorView(View):
         actor = Actors.objects.get(id=id)
         actor.delete()
         return redirect("actor-list")
+
 
 class ModifyMovie(View):
     def get(self, request, id):
@@ -129,16 +132,15 @@ class ModifyActor(View):
 
         if not name:
             return render(request, "modify_actor.html", context={"actor-name": name,
-                                                              "error": "Nie podano aktora!"})
+                                                                 "error": "Nie podano aktora!"})
 
         if not year:
             return render(request, "modify_actor.html", context={"actor-name": name,
-                                                              "error": "Nie podano daty urodzin!"})
+                                                                 "error": "Nie podano daty urodzin!"})
 
         if not gender:
             return render(request, "modify_actor.html", context={"actor-name": name,
-                                                              "error": "Nie podano płci!"})
-
+                                                                 "error": "Nie podano płci!"})
 
         if name != actor.actor_name and Actors.objects.filter(actor_name=name).first():
             return render(request, "modify_actor.html", context={"actor-name": name,
@@ -151,6 +153,17 @@ class ModifyActor(View):
         return redirect("actor-list")
 
 
+class MovieDetails(View):
+    def get(self, request, id):
+        movie = Movies.objects.get(id=id)
+        return render(request, "movie_details.html", context={"movie": movie})
+
+
+class ActorDetails(View):
+    def get(self, request, id):
+        actor = Actors.objects.get(id=id)
+        return render(request, "actor_details.html", context={"actor": actor})
+
 
 class SearchViewMovie(View):
     def get(self, request):
@@ -159,7 +172,6 @@ class SearchViewMovie(View):
         year = request.POST.get("year_of_production")
         rating = request.POST.get("rating")
         genre = request.POST.get("genre")
-
         movies = Movies.objects.all()
 
         if director:
@@ -167,22 +179,27 @@ class SearchViewMovie(View):
         if year:
             movies = movies.filter(year_of_production=year)
         if name:
-            movies.filter(movie_name=name)
+            movies.filter(movie_name__contains=name)
         if rating:
             movies = movies.filter(rating=rating)
         if genre:
             movies = movies.filter(genre=genre)
 
+        return render(request, "movies.html", context={"movie": movies})
 
-        return render(request, "movies.html", context={"movies": movies})
 
+class SearchViewActor(View):
+    def get(self, request):
+        name = request.POST.get("actor-name")
+        year = request.POST.get("year_of_birth")
+        gender = request.POST.get("gender")
+        actor = Actors.objects.all()
 
-class MovieDetails(View):
-    def get(self, request, id):
-        movie = Movies.objects.get(id=id)
-        return render(request, "movie_details.html", context={"movie": movie})
+        if name:
+            actor.filter(actor_name__contains=name)
+        if year:
+            actor = actor.filter(year_of_birth=year)
+        if gender:
+            actor = actor.filter(gender=gender)
 
-class ActorDetails(View):
-    def get(self, request, id):
-        actor = Actors.objects.get(id=id)
-        return render(request, "actor_details.html", context={"actor": actor})
+        return render(request, "actors.html", context={"actor": actor})
