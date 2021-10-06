@@ -46,33 +46,29 @@
   <thead>
     <tr class="d-flex">
       <th scope="col" class="col-1">#</th>
-      <th scope="col" class="col-2">Nazwa Filmu</th>
-      <th scope="col" class="col-1">Reżyser</th>
-      <th scope="col" class="col-2">Rok produkcji</th>
-      <th scope="col" class="col-1">Rating</th>
-      <th scope="col" class="col-1">Gatunek</th>
+      <th scope="col" class="col-2">Aktor</th>
+      <th scope="col" class="col-2">Data urodzenia</th>
+      <th scope="col" class="col-2">Płeć</th>
     </tr>
   </thead>
   <tbody>
-    {% for movie in movies %}
+    {% for actor in actors %}
     <tr class="d-flex">
-      <th scope="row" class="col-1">{{ movie.id }}</th>
+      <th scope="row" class="col-1">{{ actor.id }}</th>
       <td class="col-2">
-        <a href="/movie/{{ movie.id }}/">{{ movie.movie_name }}</a>
+        <a href="/actor/{{ actor.id }}/">{{ actor.actor_name }}</a>
       </td>
-      <td class="col-1">{{ movie.director }}</td>
-      <td class="col-2">{{ movie.year_of_production }}</td>
-      <td class="col-1">{{ movie.rating }}</td>
-      <td class="col-2">{{ movie.genre }}</td>
+      <td class="col-2">{{ actor.year_of_birth }}</td>
+      <td class="col-2">{{ actor.gender }}</td>
       <td class="col-1">
-        <a href="/movie/modify/{{ movie.id }}/">edytuj</a>
+        <a href="/actor/modify/{{ actor.id }}/">edytuj</a>
       </td>
       <td class="col-1">
-        <a href="/movie/delete/{{ movie.id }}/">usuń</a>
+        <a href="/actor/delete/{{ actor.id }}/">usuń</a>
       </td>
     </tr>
     {% empty %}
-      <tr><td colspan="6">Brak filmów</td></tr>
+      <tr><td colspan="6">Brak aktorów</td></tr>
     {% endfor %}
   </tbody>
 </table>
@@ -85,31 +81,16 @@
     <form action="/search" method="GET">
       {% csrf_token %}
       <div class="form-group">
-        <label for="movie-name">Nazwa filmu</label>
-        <input type="text" class="form-control" id="movie-name" aria-describedby="movie-name-help" placeholder="Nazwa filmu" name="movie-name">
+        <label for="actor-name">Imię i nazwisko aktora</label>
+        <input type="text" class="form-control" id="actor-name" aria-describedby="actor-name-help" placeholder="Imię i nazwisko aktora" name="actor-name">
       </div>
       <div class="form-group">
-        <label for="director">Reżyser</label>
-        <input type="text" class="form-control" id="director" aria-describedby="director-help" placeholder="Reżyser" name="director">
+        <label for="year_of_birth">Data urodzenia</label>
+        <input type="text" class="form-control" id="year_of_birth" aria-describedby="year_of_birth-help" placeholder="Data urodzenia" name="year_of_birth">
       </div>
       <div class="form-group">
-        <label for="year_of_production">Rok produkcji</label>
-        <input type="number" step="1" class="form-control" id="year_of_production" placeholder="2000" name="year_of_production">
-      </div>
-      <div class="form-group">
-          <label for="rating">Rating</label>
-          <select>
-            <option>5</option>
-            <option selected>4</option>
-            <option>3</option>
-            <option>2</option>
-            <option>1</option>
-            <option>0</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="genre">Gatunek</label>
-        <input type="number" step="1" class="form-control" id="genre" placeholder="1" name="genre">
+        <label for="gender">Płeć</label>
+        <input type="number" step="1" class="form-control" id="gender" placeholder="Don't know / Man / Woman" name="gender">
       </div>
       <button type="submit" class="btn btn-primary">Szukaj</button>
     </form>

@@ -36,3 +36,32 @@ class MovieListView(View):
     def get(self, request):
         movies = Movies.objects.all()
         return render(request, "movies.html", context={"movies": movies})
+
+class AddActor(View):
+    def get(self, request):
+        return render(request, "add_actor.html")
+
+    def post(self, request):
+        name = request.POST.get("actor-name")
+        year = request.POST.get("year_of_birth")
+        gender = request.POST.get("gender")
+
+        if not name:
+            return render(request, "add_actor.html", context={"error": "Nie podano aktora!"})
+
+        if not year:
+            return render(request, "add_actor.html", context={"error": "Nie podano daty urodzin!"})
+
+        if not gender:
+            return render(request, "add_actor.html", context={"error": "Nie podano płci!"})
+
+        if Actors.objects.filter(actor_name=name).first():
+            return render(request, "add_actor.html", context={"error": "Podany aktor już istnieje w bazie danych"})
+
+        Actors.objects.create(actor_name=name, year_of_birth=year, gender=gender)
+        return redirect("actor-list")
+
+class ActorListView(View):
+    def get(self, request):
+        actors = Actors.objects.all()
+        return render(request, "actors.html", context={"actors": actors})

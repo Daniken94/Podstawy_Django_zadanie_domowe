@@ -25,7 +25,7 @@ class Actors(models.Model):
         (1, "WOMAN"),
     )
     actor_name = models.CharField(max_length=255)
-    year_of_birth = models.IntegerField(null=True)
+    year_of_birth = models.DateField()
     gender = models.IntegerField(choices=GENDER_CHOISES)
     movies = models.ManyToManyField(Movies)
 
