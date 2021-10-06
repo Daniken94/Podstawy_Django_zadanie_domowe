@@ -79,3 +79,73 @@ class DeleteActorView(View):
         actor = Actors.objects.get(id=id)
         actor.delete()
         return redirect("actor-list")
+
+class ModifyMovie(View):
+    def get(self, request, id):
+        movie = Movies.objects.get(id=id)
+        return render(request, "modify_movie.html", context={"movie-name": movie})
+
+    def post(self, request, id):
+        movie = Movies.objects.get(id=id)
+        name = request.POST.get("movie-name")
+        director = request.POST.get("director")
+        year = request.POST.get("year_of_production")
+        rating = request.POST.get("rating")
+        genre = request.POST.get("genre")
+
+        if not name:
+            return render(request, "modify_movie.html", context={"movie-name": movie,
+                                                                 "error": "Nie podano nazwy filmu!"})
+
+        if not director:
+            return render(request, "modify_movie.html", context={"movie-name": movie,
+                                                                 "error": "Nie podano reżysera!"})
+
+        if not year:
+            return render(request, "modify_movie.html", context={"movie-name": movie,
+                                                                 "error": "Rok produkcji musi być dodatni!"})
+
+        if name != movie.movie_name and Movies.objects.filter(movie_name=name).first():
+            return render(request, "modify_movie.html", context={"movie-name": movie,
+                                                                 "error": "Film o podanej nazwie juz istnieje!"})
+
+        movie.movie_name = name
+        movie.director = director
+        movie.year_of_production = year
+        movie.save()
+        return redirect("movie-list")
+
+
+class ModifyActor(View):
+    def get(self, request, id):
+        actor = Actors.objects.get(id=id)
+        return render(request, "modify_actor.html", context={"actor-name": actor})
+
+    def post(self, request, id):
+        actor = Actors.objects.get(id=id)
+        name = request.POST.get("actor-name")
+        year = request.POST.get("year_of_birth")
+        gender = request.POST.get("gender")
+
+        if not name:
+            return render(request, "modify_actor.html", context={"actor-name": name,
+                                                              "error": "Nie podano aktora!"})
+
+        if not year:
+            return render(request, "modify_actor.html", context={"actor-name": name,
+                                                              "error": "Nie podano daty urodzin!"})
+
+        if not gender:
+            return render(request, "modify_actor.html", context={"actor-name": name,
+                                                              "error": "Nie podano płci!"})
+
+
+        if name != actor.actor_name and Actors.objects.filter(actor_name=name).first():
+            return render(request, "modify_actor.html", context={"actor-name": name,
+                                                                 "error": "Taki Aktor juz istnieje!"})
+
+        actor.actor_name = name
+        actor.year_of_birth = year
+        actor.gender = gender
+        actor.save()
+        return redirect("actor-list")

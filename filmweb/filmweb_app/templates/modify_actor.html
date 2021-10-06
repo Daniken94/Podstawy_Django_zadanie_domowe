@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home Page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <style>
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 60px; /* Set the fixed height of the footer here */
+      line-height: 60px; /* Vertically center the text there */
+      background-color: #f5f5f5;
+    }
+  </style>
+</head>
+<body>
+<!-- Nav -->
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">FILMWEB 2.0</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/">Lista wszystkich filmów<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active" href="/movie/new/">Dodaj film</a>
+    </div>
+  </div>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup2">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/actors/">Lista wszystkich aktorów<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active" href="/actor/new/">Dodaj aktora</a>
+    </div>
+  </div>
+</nav>
+<!-- Nav -->
+
+<!-- Form -->
+<div class="card">
+  <div class="card-body">
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="actor-name">Aktor</label>
+        <input type="text" class="form-control" id="actor-name" aria-describedby="actor-name-help" placeholder="Aktor" name="actor-name" value="{{ actor.name }}">
+        <small id="actor-name-help" class="form-text text-muted">Aktor musi być prawdziwy.</small>
+      </div>
+      <div class="form-group">
+        <label for="year_of_birth">Data urodzin</label>
+        <input type="date" id="year_of_birth" name="year_of_birth" value="{{ actor.year_of_birth }}" max="2021-12-31"
+               min="1000-01-01" class="form-control">
+      </div>
+      <label for="gender">Płeć</label>
+      <input type="select" class="form-control" id="gende" name="gender" value="{{ actor.gender }}">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="-1">
+        <label class="form-check-label" for="inlineCheckbox1">I don' know</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="0">
+        <label class="form-check-label" for="inlineCheckbox2">Man</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="1">
+        <label class="form-check-label" for="inlineCheckbox3">Woman</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Edytuj</button>
+    </form>
+  </div>
+</div>
+<!-- Form -->
+
+{% if error %}
+<!-- Form error -->
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{error}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<!-- Form error -->
+{% endif %}
+
+<!-- Footer -->
+<footer class="footer">
+      <div class="container">
+        <span class="text-muted">Kamil Klekotka</span>
+      </div>
+    </footer>
+<!-- Footer -->
+</body>
+</html>
