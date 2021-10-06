@@ -149,3 +149,40 @@ class ModifyActor(View):
         actor.gender = gender
         actor.save()
         return redirect("actor-list")
+
+
+
+class SearchViewMovie(View):
+    def get(self, request):
+        name = request.POST.get("movie-name")
+        director = request.POST.get("director")
+        year = request.POST.get("year_of_production")
+        rating = request.POST.get("rating")
+        genre = request.POST.get("genre")
+
+        movies = Movies.objects.all()
+
+        if director:
+            movies = movies.filter(director=director)
+        if year:
+            movies = movies.filter(year_of_production=year)
+        if name:
+            movies.filter(movie_name=name)
+        if rating:
+            movies = movies.filter(rating=rating)
+        if genre:
+            movies = movies.filter(genre=genre)
+
+
+        return render(request, "movies.html", context={"movies": movies})
+
+
+class MovieDetails(View):
+    def get(self, request, id):
+        movie = Movies.objects.get(id=id)
+        return render(request, "movie_details.html", context={"movie": movie})
+
+class ActorDetails(View):
+    def get(self, request, id):
+        actor = Actors.objects.get(id=id)
+        return render(request, "actor_details.html", context={"actor": actor})

@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from filmweb_app.views import (AddMovie,
+                               ActorDetails,
+                               MovieDetails,
+                               SearchViewMovie,
                                ModifyActor,
                                ModifyMovie,
                                MovieListView,
@@ -35,4 +38,7 @@ urlpatterns = [
     path('actor/delete/<int:id>/', DeleteActorView.as_view(), name="delete-actor"),
     path('movie/modify/<int:id>/', ModifyMovie.as_view(), name="modify-movie"),
     path('actor/modify/<int:id>/', ModifyActor.as_view(), name="modify-actor"),
+    path('search-movie/', SearchViewMovie.as_view(), name="search-view-movie"),
+    path('movie/<int:id>/', MovieDetails.as_view(), name="movie"),
+    path('actor/<int:id>/', ActorDetails.as_view(), name="actor"),
 ]

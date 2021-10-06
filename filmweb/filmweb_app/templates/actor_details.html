@@ -41,46 +41,24 @@
 </nav>
 <!-- Nav -->
 
-<!-- Form -->
+
+<!-- Actor Details -->
 <div class="card">
   <div class="card-body">
-    <form action="" method="POST">
-      {% csrf_token %}
-      <div class="form-group">
-        <label for="actor-name">Aktor</label>
-        <input type="text" class="form-control" id="actor-name" aria-describedby="actor-name-help" placeholder="Aktor" name="actor-name">
-        <small id="actor-name-help" class="form-text text-muted">Aktor musi być prawdziwy.</small>
-      </div>
-      <div class="form-group">
-        <label for="year_of_birth">Data urodzin</label>
-        <input type="date" id="year_of_birth" name="year_of_birth" max="2021-12-31"
-               min="1900-01-01" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="gender">Płeć aktora. Podaj numer zgodny z kodem.</label>
-        <input type="number" step="1" class="form-control" id="gender" placeholder="Kod płci (0-2)" name="gender">
-        <small id="gender-help" class="form-text text-muted">
-        0 - Nie chcę podawać,
-        1 - Mężczyzna,
-        2 - Kobieta,
-        </small>
-      </div>
-      <button type="submit" class="btn btn-primary">Dodaj aktora</button>
-    </form>
+    <h2>Aktor: {{ actor.actor_name }}</h2>
+    <p>Data urodzenia: {{ actor.year_of_birth }}</p>
+    <p>Płeć: {{ actor.gender }}</p>
+    <p>
+
+      <a href="/actor/modify/{{ actor.id }}/">edytuj</a>
+
+      <a href="/actor/delete/{{ actor.id }}/">usuń</a>
+
+    </p>
+    </ul>
   </div>
 </div>
-<!-- Form -->
-
-{% if error %}
-<!-- Form error -->
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  {{error}}
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<!-- Form error -->
-{% endif %}
+<!-- Actor Details -->
 
 <!-- Footer -->
 <footer class="bg-light text-center text-lg-start">
