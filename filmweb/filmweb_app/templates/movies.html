@@ -87,29 +87,33 @@
       <div class="form-group">
         <label for="movie-name">Nazwa filmu</label>
         <input type="text" class="form-control" id="movie-name" aria-describedby="movie-name-help" placeholder="Nazwa filmu" name="movie-name">
+        <small id="movie-name-help" class="form-text text-muted">Nazwa filmu musi być prawdziwa.</small>
       </div>
       <div class="form-group">
         <label for="director">Reżyser</label>
         <input type="text" class="form-control" id="director" aria-describedby="director-help" placeholder="Reżyser" name="director">
+        <small id="director-help" class="form-text text-muted">Reżyser musi być prawdziwy.</small>
       </div>
       <div class="form-group">
         <label for="year_of_production">Rok produkcji</label>
         <input type="number" step="1" class="form-control" id="year_of_production" placeholder="2000" name="year_of_production">
       </div>
-      <div class="form-group">
+        <div class="form-group">
           <label for="rating">Rating</label>
-          <select>
-            <option>5</option>
-            <option selected>4</option>
-            <option>3</option>
-            <option>2</option>
-            <option>1</option>
-            <option>0</option>
-        </select>
+          <input type="select" class="form-control" id="rating" placeholder="Ocena w skali 0 - 5" name="rating">
       </div>
       <div class="form-group">
-        <label for="genre">Gatunek</label>
-        <input type="number" step="1" class="form-control" id="genre" placeholder="1" name="genre">
+        <label for="genre">Gatunek filmu. Podaj numer kategorii.</label>
+        <input type="number" step="1" class="form-control" id="genre" placeholder="Gatunek w skali 0 - 6" name="genre">
+        <small id="genre-help" class="form-text text-muted">
+        0 - Nie wiem,
+        1 - Komedia,
+        2 - Musical,
+        3 - Familijny,
+        4 - Film akcji,
+        5 - Przygodowy,
+        6 - Horror"
+        </small>
       </div>
       <button type="submit" class="btn btn-primary">Szukaj</button>
     </form>
@@ -119,11 +123,14 @@
 
 
 <!-- Footer -->
-<footer class="footer">
-      <div class="container">
-        <span class="text-muted">Kamil Klekotka</span>
-      </div>
-    </footer>
+<footer class="bg-light text-center text-lg-start">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.3);">
+    Kamil Klekotka:
+    <a class="text-dark" href="https://mdbootstrap.com/">https://github.com/Daniken94/Podstawy_Django_zadanie_domowe</a>
+  </div>
+  <!-- Copyright -->
+</footer>
 <!-- Footer -->
 </body>
 </html>

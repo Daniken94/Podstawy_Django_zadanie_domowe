@@ -78,19 +78,26 @@
 <h3>Wyszukiwanie</h3>
 <div class="card">
   <div class="card-body">
-    <form action="/search" method="GET">
+    <form action="" method="POST">
       {% csrf_token %}
       <div class="form-group">
-        <label for="actor-name">Imię i nazwisko aktora</label>
-        <input type="text" class="form-control" id="actor-name" aria-describedby="actor-name-help" placeholder="Imię i nazwisko aktora" name="actor-name">
+        <label for="actor-name">Aktor</label>
+        <input type="text" class="form-control" id="actor-name" aria-describedby="actor-name-help" placeholder="Aktor" name="actor-name">
+        <small id="actor-name-help" class="form-text text-muted">Aktor musi być prawdziwy.</small>
       </div>
       <div class="form-group">
-        <label for="year_of_birth">Data urodzenia</label>
-        <input type="text" class="form-control" id="year_of_birth" aria-describedby="year_of_birth-help" placeholder="Data urodzenia" name="year_of_birth">
+        <label for="year_of_birth">Data urodzin</label>
+        <input type="date" id="year_of_birth" name="year_of_birth" max="2021-12-31"
+               min="1900-01-01" class="form-control">
       </div>
       <div class="form-group">
-        <label for="gender">Płeć</label>
-        <input type="number" step="1" class="form-control" id="gender" placeholder="Don't know / Man / Woman" name="gender">
+        <label for="gender">Płeć aktora. Podaj numer zgodny z kodem.</label>
+        <input type="number" step="1" class="form-control" id="gender" placeholder="Kod płci (0-2)" name="gender">
+        <small id="gender-help" class="form-text text-muted">
+        0 - Nie chcę podawać,
+        1 - Mężczyzna,
+        2 - Kobieta,
+        </small>
       </div>
       <button type="submit" class="btn btn-primary">Szukaj</button>
     </form>
@@ -100,11 +107,14 @@
 
 
 <!-- Footer -->
-<footer class="footer">
-      <div class="container">
-        <span class="text-muted">Kamil Klekotka</span>
-      </div>
-    </footer>
+<footer class="bg-light text-center text-lg-start">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.3);">
+    Kamil Klekotka:
+    <a class="text-dark" href="https://mdbootstrap.com/">https://github.com/Daniken94/Podstawy_Django_zadanie_domowe</a>
+  </div>
+  <!-- Copyright -->
+</footer>
 <!-- Footer -->
 </body>
 </html>

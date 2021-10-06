@@ -48,29 +48,24 @@
       {% csrf_token %}
       <div class="form-group">
         <label for="actor-name">Aktor</label>
-        <input type="text" class="form-control" id="actor-name" aria-describedby="actor-name-help" placeholder="Aktor" name="actor-name" value="{{ actor.name }}">
+        <input type="text" class="form-control" id="actor-name" aria-describedby="actor-name-help" placeholder="Aktor" name="actor-name">
         <small id="actor-name-help" class="form-text text-muted">Aktor musi być prawdziwy.</small>
       </div>
       <div class="form-group">
         <label for="year_of_birth">Data urodzin</label>
-        <input type="date" id="year_of_birth" name="year_of_birth" value="{{ actor.year_of_birth }}" max="2021-12-31"
-               min="1000-01-01" class="form-control">
+        <input type="date" id="year_of_birth" name="year_of_birth" max="2021-12-31"
+               min="1900-01-01" class="form-control">
       </div>
-      <label for="gender">Płeć</label>
-      <input type="select" class="form-control" id="gende" name="gender" value="{{ actor.gender }}">
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="-1">
-        <label class="form-check-label" for="inlineCheckbox1">I don' know</label>
+      <div class="form-group">
+        <label for="gender">Płeć aktora. Podaj numer zgodny z kodem.</label>
+        <input type="number" step="1" class="form-control" id="gender" placeholder="Kod płci (0-2)" name="gender">
+        <small id="gender-help" class="form-text text-muted">
+        0 - Nie chcę podawać,
+        1 - Mężczyzna,
+        2 - Kobieta,
+        </small>
       </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="0">
-        <label class="form-check-label" for="inlineCheckbox2">Man</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="1">
-        <label class="form-check-label" for="inlineCheckbox3">Woman</label>
-      </div>
-      <button type="submit" class="btn btn-primary">Edytuj</button>
+      <button type="submit" class="btn btn-primary">Dodaj aktora</button>
     </form>
   </div>
 </div>
@@ -88,11 +83,14 @@
 {% endif %}
 
 <!-- Footer -->
-<footer class="footer">
-      <div class="container">
-        <span class="text-muted">Kamil Klekotka</span>
-      </div>
-    </footer>
+<footer class="bg-light text-center text-lg-start">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.3);">
+    Kamil Klekotka:
+    <a class="text-dark" href="https://mdbootstrap.com/">https://github.com/Daniken94/Podstawy_Django_zadanie_domowe</a>
+  </div>
+  <!-- Copyright -->
+</footer>
 <!-- Footer -->
 </body>
 </html>
